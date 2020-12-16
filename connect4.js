@@ -46,7 +46,7 @@ function makeHtmlBoard() {
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
-
+  
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", x);
@@ -70,8 +70,8 @@ function makeHtmlBoard() {
     }
     htmlBoard.append(row);
   }
-}
 
+}
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
@@ -182,5 +182,18 @@ reset.addEventListener("click", () => {
 })
 makeBoard();
 makeHtmlBoard();
+let td = document.querySelectorAll("#column-top td");
+let tdArray = Array.from(td);
+
+for (let box in tdArray) {
+  tdArray[box].addEventListener("mouseenter",e => {
+    tdArray[box].style.backgroundImage = pieceArray[currPlayer-1];
+})
+}
+for (let box in tdArray) {
+    tdArray[box].addEventListener("mouseleave",e => {
+      tdArray[box].style.backgroundImage = null;
+  })
+}
 
 
