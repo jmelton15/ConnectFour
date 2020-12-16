@@ -174,7 +174,12 @@ function checkForWin() {
     }
   }
 }
+const reset = document.querySelector("#reset");
+reset.addEventListener("click", () => {
 
+  location.reload();
+
+})
 makeBoard();
 makeHtmlBoard();
 
