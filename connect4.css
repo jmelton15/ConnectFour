@@ -53,9 +53,11 @@ body {
   border: dashed 1px black;
 }
 
-@media (max-width: 900px) {
+@media (max-width:600px) {
   #column-top td:hover {
-      Background-Image: none;
-    }
+    border: dashed 1px black;
+    background-image: none;
+    background-color: green;
+  }
 }
 
