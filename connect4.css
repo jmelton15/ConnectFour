@@ -55,7 +55,7 @@ body {
 
 @media (max-width: 900px) {
   #column-top td:hover {
-       Background-Color: yellow;
+      Background-Image: none;
     }
 }
 
