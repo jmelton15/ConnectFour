@@ -182,18 +182,28 @@ reset.addEventListener("click", () => {
 })
 makeBoard();
 makeHtmlBoard();
+const mq = window.matchMedia("(max-width: 600px)")
 let td = document.querySelectorAll("#column-top td");
 let tdArray = Array.from(td);
 
-for (let box in tdArray) {
-  tdArray[box].addEventListener("mouseenter",e => {
-    tdArray[box].style.backgroundImage = pieceArray[currPlayer-1];
-})
-}
-for (let box in tdArray) {
-    tdArray[box].addEventListener("mouseleave",e => {
-      tdArray[box].style.backgroundImage = null;
+if (mq.matches) {
+  for (let box in tdArray) {
+    tdArray[box].removeEventListener("mouseenter",e => {
+      tdArray[box].style.backgroundImage = pieceArray[currPlayer-1];
   })
+  }
 }
+  else {
+    for (let box in tdArray) {
+      tdArray[box].addEventListener("mouseenter",e => {
+        tdArray[box].style.backgroundImage = pieceArray[currPlayer-1];
+    })
+    }
+    for (let box in tdArray) {
+        tdArray[box].addEventListener("mouseleave",e => {
+          tdArray[box].style.backgroundImage = null;
+      })
+    }
+  }
 
 
