@@ -11,10 +11,11 @@ const pieceArray = [
   'url("Images/RedPiece.png")'
 ];
 
-
+const playerH2 = document.querySelector("#player-turn");
+const playerTurns = document.querySelector("#turn-count");
 var WIDTH = 7;
 var HEIGHT = 6;
-
+let turnCount = 0;
 var currPlayer = 1; // active player: 1 or 2
 var board = []; // array of rows, each row is array of cells  (board[y][x])
 
@@ -33,7 +34,9 @@ function makeBoard() {
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   htmlBoard = document.querySelector("#board");
-  
+    playerH2.innerText = "Yellow's Turn";
+    playerH2.style.color = "Yellow";
+    playerH2.style.backgroundColor = "black";
   // TODO: add comment for this code
   /**
    *  Here we start by creating a new Table-Row (tr) element and setting it to a variable called top
@@ -131,16 +134,38 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-
+  if (checkForTie()) {
+    htmlBoard.rows[0].removeEventListener("click", handleClick);
+    return endGame(`Board Is Full, No Winners. Play Again!`);
+  }
   // switch players
   // TODO: switch currPlayer 1 <-> 2
   if (currPlayer === 1) {
+    playerH2.innerText = "Red's Turn";
+    playerH2.style.color = "Red";
+    playerH2.style.backgroundColor = "black";
     currPlayer++;
   }
   else {
+    playerH2.innerText = "Yellow's Turn";
+    playerH2.style.color = "Yellow";
+    playerH2.style.backgroundColor = "black";
     currPlayer--;
   }
+  turnCount++;
+  playerTurns.innerText = `Turns: ${turnCount}`;
+ 
 }
+
+function checkForTie() {
+  if (turnCount === HEIGHT*WIDTH) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 function checkForWin() {
@@ -182,6 +207,7 @@ reset.addEventListener("click", () => {
 })
 makeBoard();
 makeHtmlBoard();
+
 let td = document.querySelectorAll("#column-top td");
 let tdArray = Array.from(td);
 
