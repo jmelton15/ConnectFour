@@ -98,3 +98,9 @@ u {
       transform: translateY(0px);
   }
 }
+
+@media (max-width:600px) {
+  .top-bar {
+    margin-bottom:5px;
+  }
+}
