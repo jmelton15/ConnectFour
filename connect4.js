@@ -128,7 +128,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-   alert(msg);
+  alert(msg);
 }
   // TODO: pop up alert message
 
@@ -156,7 +156,6 @@ function handleClick(evt) {
     return setTimeout(() => {
       endGame(`Player ${colorArray[currPlayer]} won!`);
   },400)};
-  }
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
@@ -276,3 +275,4 @@ if (screen.width <= 699) {
 } else {
   addMouseEvents();
 }
+
