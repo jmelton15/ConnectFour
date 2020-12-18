@@ -10,19 +10,25 @@ const pieceArray = [
   'url("Images/YellowPiece.png")',
   'url("Images/RedPiece.png")'
 ];
+const colorArray = [
+  "Yellow", "Red"
+];
 
 const playerH2 = document.querySelector("#player-turn");
 const playerTurns = document.querySelector("#turn-count");
 var WIDTH = 7;
 var HEIGHT = 6;
 let turnCount = 0;
-var currPlayer = 1; // active player: 1 or 2
+var currPlayer = 0; // active player: 1 or 2 .. player 1 = 0  player 2 = 1 (for array purposes)
 var board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
+
+
+ 
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   board = new Array(HEIGHT).fill(null).map(() => new Array(WIDTH).fill(null));
@@ -80,7 +86,7 @@ function makeHtmlBoard() {
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
   for (let i = HEIGHT-1; i >= 0; i--){
-    if (board[i][x] !== 1 && board[i][x] !== 2) {
+    if (board[i][x] !== 0 && board[i][x] !== 1) {
         board[i][x] = currPlayer;
         return i;
     }
@@ -94,11 +100,14 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
-  if (currPlayer === 1 ) {
+  
+  if (currPlayer === 0 ) {
     htmlBoard.rows[y+1].cells[x].style.backgroundImage = "url('Images/YellowPiece.png')";
+    
   }
-  if (currPlayer === 2) {
+  if (currPlayer === 1) {
     htmlBoard.rows[y+1].cells[x].style.backgroundImage = "url('Images/RedPiece.png')";
+  
   }
 }
 
@@ -125,11 +134,12 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(y, x);
-
+    htmlBoard.rows[y+1].cells[x].classList.add("fall");
+    htmlBoard.rows[y+1].cells[x].style.backgroundImage = pieceArray[currPlayer];
   // check for win
   if (checkForWin()) {
     htmlBoard.rows[0].removeEventListener("click", handleClick);
-    return endGame(`Player ${currPlayer} won!`);
+    return endGame(`Player ${colorArray[currPlayer]} won!`);
   }
 
   // check for tie
@@ -140,13 +150,15 @@ function handleClick(evt) {
   }
   // switch players
   // TODO: switch currPlayer 1 <-> 2
-  if (currPlayer === 1) {
+  if (currPlayer === 0) {
+    htmlBoard.rows[y].cells[x].style.backgroundImage = '';
     playerH2.innerText = "Red's Turn";
     playerH2.style.color = "Red";
     playerH2.style.backgroundColor = "black";
     currPlayer++;
   }
   else {
+    htmlBoard.rows[y].cells[x].style.backgroundImage = '';
     playerH2.innerText = "Yellow's Turn";
     playerH2.style.color = "Yellow";
     playerH2.style.backgroundColor = "black";
@@ -154,7 +166,6 @@ function handleClick(evt) {
   }
   turnCount++;
   playerTurns.innerText = `Turns: ${turnCount}`;
- 
 }
 
 function checkForTie() {
@@ -211,13 +222,33 @@ makeHtmlBoard();
 let td = document.querySelectorAll("#column-top td");
 let tdArray = Array.from(td);
 
-for (let box in tdArray) {
+/**
+ * Below are functions I will use depending on the screen size to add the proper listeners
+ * the mouse events work well when not using a touchscreen, so I needed to come up with a way
+ * to implement a different kind of feel and even for mobile and touchscreen users
+ */
+function addMouseEvents() {
+  for (let box in tdArray) {
     tdArray[box].addEventListener("mouseenter",e => {
-    tdArray[box].style.backgroundImage = pieceArray[currPlayer-1];
+    tdArray[box].style.backgroundImage = pieceArray[currPlayer];
   })
 }
-for (let box in tdArray) {
+  for (let box in tdArray) {
     tdArray[box].addEventListener("mouseleave",e => {
     tdArray[box].style.backgroundImage = null;
     })
+  }
+}
+function mouseEventsMobile() {
+  for (let box in tdArray) {
+      tdArray[box].classList.add("hover");
+  }
+}
+/********* */
+
+if (screen.width <= 699) {
+  mouseEventsMobile();
+  
+} else {
+  addMouseEvents();
 }
