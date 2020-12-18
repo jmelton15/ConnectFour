@@ -128,7 +128,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  setTimeout(() => {alert(msg),1000;});
+   alert(msg);
 }
   // TODO: pop up alert message
 
@@ -153,7 +153,9 @@ function handleClick(evt) {
   // check for win
   if (checkForWin()) {
     htmlBoard.rows[0].removeEventListener("click", handleClick);
-    return endGame(`Player ${colorArray[currPlayer]} won!`);
+    return setTimeout(() => {
+      endGame(`Player ${colorArray[currPlayer]} won!`);
+  },400)};
   }
 
   // check for tie
