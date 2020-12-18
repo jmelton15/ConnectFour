@@ -74,6 +74,7 @@ body {
   z-index: 1;
 }
 
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -81,9 +82,6 @@ u {
   color: blue;
   font-weight: bolder;
 }
-
-
-
 
 .fall {
   animation-name: fall-animation;
@@ -96,5 +94,11 @@ u {
   }
   to {
       transform: translateY(0px);
+  }
+}
+
+@media (max-width:600px) {
+  .top-bar {
+    margin-bottom:5px;
   }
 }

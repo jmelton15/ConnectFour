@@ -5,14 +5,21 @@
  * board fills (tie)
  */
 
-
+/**
+ * I will be using the array below in sync with the current player to alternate the 
+ * token images
+ */
 const pieceArray = [
   'url("Images/YellowPiece.png")',
   'url("Images/RedPiece.png")'
 ];
+/**
+ * I use the array below to alternate the color of the text based on the current player
+ */
 const colorArray = [
   "Yellow", "Red"
 ];
+
 
 const playerH2 = document.querySelector("#player-turn");
 const playerTurns = document.querySelector("#turn-count");
@@ -28,7 +35,14 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
 
 
 
- 
+ /**
+  * The code for make board took some time to run through and get to
+  * Basically what is happening is we are taking the empty board that we declared above
+  * turning it initially into an array of HEIGHT (6) nulls.
+  * Then, by using map, we are creating a new array to replace each of the 6 nulls
+  * this happens 7 times until we have a 6x7 board of nulls.
+  * A Single board array that now has 6 arrays that are 7 elements long
+  */
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   board = new Array(HEIGHT).fill(null).map(() => new Array(WIDTH).fill(null));
@@ -114,7 +128,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  setTimeout(() => {alert(msg),1000;});
+  alert(msg);
 }
   // TODO: pop up alert message
 
@@ -139,8 +153,9 @@ function handleClick(evt) {
   // check for win
   if (checkForWin()) {
     htmlBoard.rows[0].removeEventListener("click", handleClick);
-    return endGame(`Player ${colorArray[currPlayer]} won!`);
-  }
+    return setTimeout(() => {
+      endGame(`Player ${colorArray[currPlayer]} won!`);
+  },400)};
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
@@ -196,7 +211,15 @@ function checkForWin() {
   }
 
   // TODO: read and understand this code. Add comments to help you.
-
+/**
+ * Short and sweet explanation
+ * horiz, vert, diagDR, and diagDL are some form of 4 "boxes" in a row
+ * either horizontally starting from 0 going to 6 or vertical starting from 0 going to 5
+ * or diagnal from the R (DR) or diagnal from the left (DL)
+ * these cells are checked 43 times in a sense HEIGHT * WIDTH of the board
+ * to see if any 4 boxes have an ID that is the same as the current players number 
+ * either 0 or 1
+ */
   for (var y = 0; y < HEIGHT; y++) {
     for (var x = 0; x < WIDTH; x++) {
       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
