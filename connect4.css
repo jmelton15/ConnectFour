@@ -55,10 +55,46 @@ body {
 #column-top td {
   border: dashed 1px black;
 }
+.hover:hover {
+  background-color: black;
+  opacity: 50%;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-@media (max-width: 600px) {
-  #column-top td:hover {
-   background-Image: none;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+u {
+  color: blue;
+  font-weight: bolder;
+}
+
+
+
+
+.fall {
+  animation-name: fall-animation;
+  animation-duration: 500ms;
+}
+
+@keyframes fall-animation {
+  from {
+      transform: translateY(-400px);
   }
-
+  to {
+      transform: translateY(0px);
+  }
 }
