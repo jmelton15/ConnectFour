@@ -242,6 +242,7 @@ function newGame() {
   for (let i = 0; i<=HEIGHT; i++) {
     htmlBoard.rows[i].classList.add("ending-fall");
   }
+  htmlBoard.style.borderBottom = "none";
   setTimeout(() => {location.reload();},1100);
 }
 
