@@ -10,20 +10,23 @@
   <h2 id=player-turn></h2>
   <p id="turn-count">Turns: </p>
   <div class="dropdown"> 
-      <span><u>How To Start</u> (Hover/Click Here)</span>
+      <span><u>How To Play/Start New Game</u> (Hover/Click Here)</span>
       <div class="dropdown-content">
-          <p id="dd-text">Click One Of The Dotted Circles To Place Piece In That Column</p>
+          <ul id="dd-text">
+            <li>Click One Of The Dotted Circles To Place Piece In That Column</li>
+            <li>To Start A New Game, Click New Game Button Below or Click Arrow At The Bottom Of The Board</li>
+          </ul>
+          <div id="options">
+            <button type="button" id="replay">New Game</button>
+          </div>
       </div>
   </div>
 </div>
 <div id="game">
   <table id="board"></table>
+  <div class="side-div"><img src="Images/arrow.png" id="restart-arrow">
+  </div>
 </div>
-<div id="options">
-  <button type="button" id="reset">Restart</button>
-</div>
-
-
 
 <script src="connect4.js"></script>
 

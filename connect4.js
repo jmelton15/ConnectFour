@@ -233,12 +233,25 @@ function checkForWin() {
     }
   }
 }
-const reset = document.querySelector("#reset");
-reset.addEventListener("click", () => {
 
-  location.reload();
+const resetButton = document.querySelector("#replay");
+const resetArrow = document.querySelector("#restart-arrow");
+const arrowNG = document.querySelector("#arrow-ng");
 
-})
+function newGame() {
+  for (let i = 0; i<=HEIGHT; i++) {
+    htmlBoard.rows[i].classList.add("ending-fall");
+  }
+  setTimeout(() => {location.reload();},1100);
+}
+
+resetButton.addEventListener("click", () => {
+  newGame();
+});
+resetArrow.addEventListener("click", () => {
+  newGame();
+});
+
 makeBoard();
 makeHtmlBoard();
 
