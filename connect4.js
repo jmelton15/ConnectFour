@@ -1,3 +1,4 @@
+
 /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
@@ -292,21 +293,9 @@ function mouseEventsMobile() {
 }
 /********* */
 
-if (screen.width <= 699) {
+if (screen.width <= 900 || navigator.userAgent.match(/ipad/i)) {
   mouseEventsMobile();
   
 } else {
   addMouseEvents();
 }
-
-
-
-
-
-
-
-
-
-
-
-
