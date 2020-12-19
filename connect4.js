@@ -234,13 +234,21 @@ function checkForWin() {
   }
 }
 
+
 const resetButton = document.querySelector("#replay");
 const resetArrow = document.querySelector("#restart-arrow");
 const arrowNG = document.querySelector("#arrow-ng");
 
+/**
+ * Added a function to reset game with some animations that mimic the clearing of the board
+ * like in the real connect-four game
+ */
+
 function newGame() {
-  for (let i = 0; i<=HEIGHT; i++) {
-    htmlBoard.rows[i].classList.add("ending-fall");
+  const lp = document.querySelectorAll(".fall");
+  let lonePieces = Array.from(lp); 
+  for (let p in lonePieces) {
+    lonePieces[p].classList.add("ending-fall");
   }
   htmlBoard.style.borderBottom = "none";
   setTimeout(() => {location.reload();},1100);
@@ -252,6 +260,7 @@ resetButton.addEventListener("click", () => {
 resetArrow.addEventListener("click", () => {
   newGame();
 });
+
 
 makeBoard();
 makeHtmlBoard();

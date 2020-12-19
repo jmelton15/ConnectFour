@@ -36,7 +36,6 @@ li {
 }
 #restart-arrow:hover {
   filter:brightness(200%);
-  height:70px;
 }
 
 #board {
