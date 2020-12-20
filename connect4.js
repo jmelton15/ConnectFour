@@ -185,7 +185,7 @@ function handleClick(evt) {
 }
 
 function checkForTie() {
-  if (turnCount === HEIGHT*WIDTH) {
+  if (turnCount === (HEIGHT*WIDTH)-1) {
     return true;
   }
   else {
